@@ -3,60 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <title>vue サンプル作成</title>
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css">
 <style type="text/css">
     [v-cloak] { display: none }
 </style>
 </head>
 <body>
-<div id="app" v-cloak>
-    <p>
-        {{ message }}
-    </p>
-    <span v-bind:title="message2">
-        Hover your mouse
-    </span>
-    <p v-if="seen">あだむあっぷはクソ</p>
-    <ul>
-        <li v-for="todo in todos">
-            {{todo.text}}
-        </li>
-    </ul>
-    <button v-on:click="reverseMessage">出社</button>
-    <input v-model="message">
-    <ol>
-        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
-    </ol>
+
+<header>
+
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item is-brand" href="#">
+          AdamApple
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <a class="nav-item" href="#">
+          <span class="icon">
+            <i class="fa fa-github"></i>
+          </span>
+        </a>
+        <a class="nav-item" href="#">
+          <span class="icon">
+            <i class="fa fa-twitter"></i>
+          </span>
+        </a>
+      </div>
+
+      <span class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+
+      <div class="nav-right nav-menu">
+        <a class="nav-item" href="#">
+          Home
+        </a>
+        <a class="nav-item" href="#">
+          Documentation
+        </a>
+        <a class="nav-item" href="#">
+          Blog
+        </a>
+
+        <span class="nav-item">
+          <a class="button" >
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+            <span>Tweet</span>
+          </a>
+          <a class="button is-primary" href="#">
+            <span class="icon">
+              <i class="fa fa-download"></i>
+            </span>
+            <span>Download</span>
+          </a>
+        </span>
+      </div>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <p class="notification is-info">
+          <code class="html">is-two-thirds</code>
+        </p>
+      </div>
+      <div class="column">
+        <p class="notification is-warning">Auto</p>
+      </div>
+      <div class="column">
+        <p class="notification is-danger">Auto</p>
+      </div>
+    </div>
+
 </div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/jgthms/bulma">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js"></script>
 <script type="text/javascript">
-Vue.component('todo-item', {
-    props: ['todo'],
-    template: '<li>{{ todo.text }}</li>'
-})
-var app = new Vue({
-    el: '#app',
-    data:{
-        message:'ADAM APP',
-        message2: 'You loaded this page on ' + new Date(),
-        seen: true,
-        todos: [
-            {text: 'おやまだ'},
-            {text: 'いのせ'},
-            {text: 'いとう'}
-        ],
-        groceryList:[
-            {text:'やまこし'},
-            {text:'さとう'},
-            {text:'なんぽ'}
-        ]
-    },
-    methods:{
-        reverseMessage : function() {
-            this.message = this.message.split('').reverse().join('')
-        }
-    } ,
-})
 </script>
 </body>
 </html>
