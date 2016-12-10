@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>vue サンプル作成</title>
+<link rel="stylesheet" href="">
+<style type="text/css">
+    [v-cloak] { display: none }
+</style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <p>
+        {{ message }}
+    </p>
+    <span v-bind:title="message2">
+        Hover your mouse
+    </span>
+    <p v-if="seen">あだむあっぷはクソ</p>
+    <ul>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ul>
+    <button v-on:click="reverseMessage">出社</button>
+    <input v-model="message">
+    <ol>
+        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    </ol>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js"></script>
+<script type="text/javascript">
+Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>'
+})
+var app = new Vue({
+    el: '#app',
+    data:{
+        message:'ADAM APP',
+        message2: 'You loaded this page on ' + new Date(),
+        seen: true,
+        todos: [
+            {text: 'おやまだ'},
+            {text: 'いのせ'},
+            {text: 'いとう'}
+        ],
+        groceryList:[
+            {text:'やまこし'},
+            {text:'さとう'},
+            {text:'なんぽ'}
+        ]
+    },
+    methods:{
+        reverseMessage : function() {
+            this.message = this.message.split('').reverse().join('')
+        }
+    } ,
+})
+</script>
+</body>
+</html>
