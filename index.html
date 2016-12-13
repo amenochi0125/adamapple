@@ -39,34 +39,38 @@
     </span>
 
     <div class="nav-right nav-menu">
-      <a class="nav-item" href="#">
-        ホーム
-      </a>
-      <a class="nav-item" href="#">
-        サイトマップ
-      </a>
-      <a class="nav-item" href="#">
-        会社情報
-      </a>
-          <a class="nav-item" href="#">
-        事業内容
-      </a>
-      <a class="nav-item" href="#">
-        アクセス
-      </a>
-      <a class="nav-item" href="#">
-        採用情報
-      </a>
-      <a class="nav-item" href="#">
-        お問い合わせ
-      </a>
+      <header-menu-item v-for="item in headerMenuList" v-bind:menu="item" v-bind:link="item"></header-menu-item>
     </div>
   </nav>
 
 </header>
 
 <div class="container">
+  <p></p>
+    <div class="card">
+      <header class="card-header">
+          <p class="card-header-title">A ccurate</p>
+      </header>
+      <div class="card-content">
+<div class="content">
+  お客様のニーズ・要望に的確にお応えいたします。
+</div>
+      </div>
+    </div>
 
+
+    <div class="content">
+      <p></p>
+      <h3>Adamappleとは？</h3>
+    
+      <ul style="list-style-type:none;">
+        <li>Accurate</li>
+        <li><div class="notification">お客様のニーズ・要望に的確にお応えいたします。</div></li>
+        <li>dream</li>
+        <li>available</li>
+        <li>make</li>
+        <li>App</li>
+    </div>
     <div class="columns">
       <div class="column is-two-thirds">
         <p class="notification is-info">
@@ -102,6 +106,24 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js"></script>
 <script type="text/javascript">
+Vue.component('header-menu-item', {
+    props: ['menu'],
+    template: '<a class="nav-item" href="#">{{ menu.text }}</a>',
+})
+var header = new Vue({
+    el: 'header',
+    data:{
+        headerMenuList:[
+            {text:'ホーム'},
+            {text:'サイトマップ'},
+            {text:'会社情報'},
+            {text:'事業内容'},
+            {text:'アクセス'},
+            {text:'採用情報'},
+            {text:'お問い合わせ'}
+        ]
+    },
+})
 </script>
 </body>
 </html>
