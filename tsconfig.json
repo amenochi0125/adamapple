@@ -1,0 +1,22 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "public/js",
+    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "lib": ["es2015", "dom"]
+  },
+  "files": [
+    "src/ts/app.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

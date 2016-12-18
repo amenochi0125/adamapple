@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>vue サンプル作成</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css">
-<style type="text/css">
-    [v-cloak] { display: none }
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -62,7 +59,7 @@
     <div class="content">
       <p></p>
       <h3>Adamappleとは？</h3>
-    
+
       <ul style="list-style-type:none;">
         <li>Accurate</li>
         <li><div class="notification">お客様のニーズ・要望に的確にお応えいたします。</div></li>
@@ -104,26 +101,5 @@
   </div>
 </footer>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js"></script>
-<script type="text/javascript">
-Vue.component('header-menu-item', {
-    props: ['menu'],
-    template: '<a class="nav-item" href="#">{{ menu.text }}</a>',
-})
-var header = new Vue({
-    el: 'header',
-    data:{
-        headerMenuList:[
-            {text:'ホーム'},
-            {text:'サイトマップ'},
-            {text:'会社情報'},
-            {text:'事業内容'},
-            {text:'アクセス'},
-            {text:'採用情報'},
-            {text:'お問い合わせ'}
-        ]
-    },
-})
-</script>
 </body>
 </html>
