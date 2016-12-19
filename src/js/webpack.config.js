@@ -8,21 +8,29 @@ module.exports = {
   output: {
     filename: 'js/[name].js'
   },
-  // resolve: {
-  //   root: [path.join(__dirname,'node_modules')],
-  //   extensions: ['', '.webpack.js', '.web.js', '.js']
-  // },
+  resolve: {
+    root: [path.join(__dirname,'node_modules')],
+    extensions: ['', '.webpack.js', '.web.js', '.js']
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'babel',
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue'
       }
     ]
+  },
+  babel: {
+    presets: ['es2015'],
+    plugins: ['transform-runtime']
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('js/app.bundle.js')

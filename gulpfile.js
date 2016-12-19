@@ -48,7 +48,7 @@ gulp.task('js', function() {
 
 gulp.task('watch', function () {
   // gulp.watch(['./src/**/*.ts', './src/**/*.vue'], ['ts'])
-  gulp.watch('./src/**/*.js', ['js'])
+  gulp.watch(['./src/**/*.js', './src/**/*.vue'], ['js'])
   gulp.watch('./src/**/*.scss', ['sass'])
 })
 
@@ -62,4 +62,3 @@ gulp.task('webserver', function() {
 })
 
 gulp.task('default', ['build', 'watch', 'webserver'])
-

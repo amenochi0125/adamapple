@@ -1,11 +1,7 @@
 require('./bootstrap')
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
+// ルーティング
+require('./router')
 
 // 共通関数
 require('./common')
