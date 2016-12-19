@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+[v-cloak] {
+  display: none;
+}
+
+footer.footer {
+  background-color: #4a4a4a;
+  .content {
+    color: #fff;
+  }
+}
+
+// カラムの高さを揃える
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// 上下左右の中央揃え
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// col-width
+@for $i from 1 through 75 {
+    .c-w-#{$i} {
+        min-width: $col-width * $i;
+        width: $col-width * $i;
+        max-width: $col-width * $i;
+    }
+    .c-w-#{$i}-5 {
+        min-width: ($col-width * $i) + $col-width / 2;
+        width: ($col-width * $i) + $col-width / 2;
+        max-width: ($col-width * $i) + $col-width / 2;
+    }
+}
+
+// row-height
+@for $i from 1 through 24 {
+    .r-h-#{$i} {
+        min-height: $row-height * $i;
+        height: $row-height * $i;
+        max-height: $row-height * $i;
+    }
+    .r-h-#{$i}-5 {
+        min-height: ($row-height * $i) + $row-height / 2;
+        height: ($row-height * $i) + $row-height / 2;
+        max-height: ($row-height * $i) + $row-height / 2;
+    }
+}

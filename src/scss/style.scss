@@ -1,13 +1,9 @@
 @charset "utf-8";
 
+@import "variables";
 @import "../../node_modules/bulma/bulma";
 
 [v-cloak] { display: none }
 
-body {
-  background: #FFF;
-}
-
-#app {
-  padding: 10px;
-}
+@import "utilities_spacing";
+@import "common";

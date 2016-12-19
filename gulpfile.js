@@ -22,13 +22,18 @@ var errorHandler = function(error) {
   })
 }
 
-gulp.task('build', ['sass', 'js'])
+gulp.task('build', ['sass', 'fonts', 'js'])
 
 gulp.task('sass', function() {
   return gulp.src('./src/scss/style.scss')
   .pipe(plumber({errorHandler: errorHandler}))
   .pipe(webpack(webpackSass))
   .pipe(gulp.dest('./public'))
+})
+
+gulp.task('fonts', function() {
+  return gulp.src('node_modules/font-awesome/fonts/*')
+    .pipe(gulp.dest('./public/fonts'))
 })
 
 // 廃止
