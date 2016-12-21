@@ -1,14 +1,14 @@
 const router = new VueRouter({
   routes: [
-    { path: '/',           component: require('./pages/home.vue') },
-    { path: '/about',      component: require('./pages/about.vue') },
-    { path: '/business',   component: require('./pages/business.vue') },
-    { path: '/recruit',    component: require('./pages/recruit.vue') },
-    { path: '/recruit_01', component: require('./pages/recruit_01.vue') },
-    { path: '/recruit_02', component: require('./pages/recruit_02.vue') },
-    { path: '/access',     component: require('./pages/access.vue') },
-    { path: '/contact',    component: require('./pages/contact.vue') },
-    { path: '/sitemap',    component: require('./pages/sitemap.vue') }
+    { path: '/',           component: require('../vue/pages/home.vue') },
+    { path: '/about',      component: require('../vue/pages/about.vue') },
+    { path: '/business',   component: require('../vue/pages/business.vue') },
+    { path: '/recruit',    component: require('../vue/pages/recruit.vue') },
+    { path: '/recruit_01', component: require('../vue/pages/recruit_01.vue') },
+    { path: '/recruit_02', component: require('../vue/pages/recruit_02.vue') },
+    { path: '/access',     component: require('../vue/pages/access.vue') },
+    { path: '/contact',    component: require('../vue/pages/contact.vue') },
+    { path: '/sitemap',    component: require('../vue/pages/sitemap.vue') }
   ]
 })
 
