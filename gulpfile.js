@@ -22,7 +22,7 @@ var errorHandler = function(error) {
   })
 }
 
-gulp.task('build', ['sass', 'fonts', 'js'])
+gulp.task('build', ['sass', 'fonts', 'images', 'js'])
 
 gulp.task('sass', function() {
   return gulp.src('./src/scss/style.scss')
@@ -34,6 +34,11 @@ gulp.task('sass', function() {
 gulp.task('fonts', function() {
   return gulp.src('node_modules/font-awesome/fonts/*')
     .pipe(gulp.dest('./public/fonts'))
+})
+
+gulp.task('images', function() {
+  return gulp.src('./src/images/**')
+    .pipe(gulp.dest('./public/images'))
 })
 
 // 廃止

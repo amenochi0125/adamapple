@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+.recruit {
+  img {
+    max-width: 600px;
+    height: auto;
+  }
+
+  .recruit_01 {
+    background-color: tomato;
+    color: white;
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .recruit_02 {
+    background-color: skyblue;
+    color: white;
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+  }
+}

@@ -1,7 +1,3 @@
-const User = {
-  template: `<div>User {{ $route.params.id }}</div>`
-}
-
 const Header = require('./components/header.vue')
 const Footer = require('./components/footer.vue')
 
@@ -11,6 +7,8 @@ const Access = require('./pages/access.vue')
 const Contact = require('./pages/contact.vue')
 const Business = require('./pages/business.vue')
 const Recruit = require('./pages/recruit.vue')
+const Recruit01 = require('./pages/recruit_01.vue')
+const Recruit02 = require('./pages/recruit_02.vue')
 const Sitemap = require('./pages/sitemap.vue')
 
 const router = new VueRouter({
@@ -51,6 +49,22 @@ const router = new VueRouter({
       path: '/recruit',
       components: {
         default: Recruit,
+        header: Header,
+        footer: Footer
+      }
+    },
+    {
+      path: '/recruit_01',
+      components: {
+        default: Recruit01,
+        header: Header,
+        footer: Footer
+      }
+    },
+    {
+      path: '/recruit_02',
+      components: {
+        default: Recruit02,
         header: Header,
         footer: Footer
       }
