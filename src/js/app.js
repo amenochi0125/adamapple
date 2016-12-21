@@ -1,5 +1,8 @@
 require('./bootstrap')
 
+// コンポーネントの登録
+require('./components')
+
 // ルーティング
 require('./router')
 
