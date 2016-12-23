@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+@import "variables";
+@import "../../node_modules/bulma/bulma";
+
+[v-cloak] { display: none }
+
+@import "utilities_spacing";
+@import "common";
+
+// 各ページ
+@import "recruit";
