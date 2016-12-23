@@ -4,8 +4,6 @@ var webserver = require('gulp-webserver')
 var webpack = require('webpack-stream')
 var plumber = require('gulp-plumber')
 var notifier = require('node-notifier')
-var swig = require('gulp-swig')
-var data = require('gulp-data')
 var fs = require('fs')
 
 // 設定ファイル
@@ -13,26 +11,12 @@ var webpackSass = require('./src/scss/webpack.config.js')
 var webpackTypeScript = require('./src/ts/webpack.config.js')
 var webpackJavaScript = require('./src/js/webpack.config.js')
 
-// Swigデリミタを変更(Vue.jsのマスタッシュ記法と被るため変更)
-var swigOption = {
-  varControls: ['<%', '%>'],
-  tagControls: ['<%=', '%>'],
-  cmtControls: ['<%#', '%>']
-}
-
 var isExistFile = function(file) {
   try {
     fs.statSync(file)
     return true
   } catch(err) {
     if (err.code === 'ENOENT') return false
-  }
-}
-
-var getJsonData = function(file) {
-  var json = file.path.replace(/.*src\/html/, './src/json').replace(/.html$/, '.json')
-  if (isExistFile(json)) {
-    return require(json)
   }
 }
 
@@ -49,7 +33,7 @@ var errorHandler = function(error) {
   })
 }
 
-gulp.task('build', ['sass', 'fonts', 'images', 'js'])
+gulp.task('build', ['html', 'sass', 'fonts', 'images', 'js'])
 
 gulp.task('sass', function() {
   gulp.src('./src/scss/style.scss')
@@ -86,15 +70,13 @@ gulp.task('js', function() {
 gulp.task('html', function() {
   gulp.src('./src/html/*.html')
   .pipe(plumber({errorHandler: errorHandler}))
-  .pipe(data(getJsonData))
-  .pipe(swig(swigOption))
   .pipe(gulp.dest('./public'))
 })
 
 gulp.task('watch', function () {
   // gulp.watch(['./src/**/*.ts', './src/**/*.vue'], ['ts'])
   gulp.watch(['./src/**/*.js', './src/**/*.vue'], ['js'])
-  gulp.watch(['./src/**/*.html', './src/**/*.json'], ['html'])
+  gulp.watch(['./src/**/*.html'], ['html'])
   gulp.watch('./src/**/*.scss', ['sass'])
 })
 
