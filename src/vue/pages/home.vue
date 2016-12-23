@@ -1,6 +1,7 @@
 <template>
 
 <div class="container">
+  <vue-title title="株式会社アダムアップ" subtitle="AdamApp"></vue-title>
   <div class="tile is-ancestor">
     <div class="tile is-parent">
       <div class="tile is-child box">

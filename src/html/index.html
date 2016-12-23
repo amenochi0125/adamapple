@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1">
   <meta name="description" content="">
-  <title>株式会社アダムアップ</title>
+  <title><% title|default('株式会社アダムアップ') %></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,6 +13,7 @@
   <div id="app">
     <vue-header></vue-header>
     <main class="main">
+      <vue-title></vue-title>
       <router-view keep-alive transition transition-mode="out-in"></router-view>
     </main>
     <vue-footer></vue-footer>

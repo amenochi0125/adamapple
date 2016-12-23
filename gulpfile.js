@@ -1,13 +1,40 @@
+var path = require('path')
 var gulp = require('gulp')
 var webserver = require('gulp-webserver')
 var webpack = require('webpack-stream')
 var plumber = require('gulp-plumber')
 var notifier = require('node-notifier')
+var swig = require('gulp-swig')
+var data = require('gulp-data')
+var fs = require('fs')
 
 // 設定ファイル
 var webpackSass = require('./src/scss/webpack.config.js')
 var webpackTypeScript = require('./src/ts/webpack.config.js')
 var webpackJavaScript = require('./src/js/webpack.config.js')
+
+// Swigデリミタを変更(Vue.jsのマスタッシュ記法と被るため変更)
+var swigOption = {
+  varControls: ['<%', '%>'],
+  tagControls: ['<%=', '%>'],
+  cmtControls: ['<%#', '%>']
+}
+
+var isExistFile = function(file) {
+  try {
+    fs.statSync(file)
+    return true
+  } catch(err) {
+    if (err.code === 'ENOENT') return false
+  }
+}
+
+var getJsonData = function(file) {
+  var json = file.path.replace(/.*src\/html/, './src/json').replace(/.html$/, '.json')
+  if (isExistFile(json)) {
+    return require(json)
+  }
+}
 
 // エラーハンドラ
 var errorHandler = function(error) {
@@ -25,40 +52,49 @@ var errorHandler = function(error) {
 gulp.task('build', ['sass', 'fonts', 'images', 'js'])
 
 gulp.task('sass', function() {
-  return gulp.src('./src/scss/style.scss')
+  gulp.src('./src/scss/style.scss')
   .pipe(plumber({errorHandler: errorHandler}))
   .pipe(webpack(webpackSass))
   .pipe(gulp.dest('./public'))
 })
 
 gulp.task('fonts', function() {
-  return gulp.src('node_modules/font-awesome/fonts/*')
+  gulp.src('node_modules/font-awesome/fonts/*')
     .pipe(gulp.dest('./public/fonts'))
 })
 
 gulp.task('images', function() {
-  return gulp.src('./src/images/**')
+  gulp.src('./src/images/**')
     .pipe(gulp.dest('./public/images'))
 })
 
 // 廃止
 // gulp.task('ts', function() {
-//   return gulp.src('./src/ts/app.ts')
+//   gulp.src('./src/ts/app.ts')
 //   .pipe(plumber({errorHandler: errorHandler}))
 //   .pipe(webpack(webpackTypeScript))
 //   .pipe(gulp.dest('./public'))
 // })
 
 gulp.task('js', function() {
-  return gulp.src('./src/js/app.js')
+  gulp.src('./src/js/app.js')
   .pipe(plumber({errorHandler: errorHandler}))
   .pipe(webpack(webpackJavaScript))
+  .pipe(gulp.dest('./public'))
+})
+
+gulp.task('html', function() {
+  gulp.src('./src/html/*.html')
+  .pipe(plumber({errorHandler: errorHandler}))
+  .pipe(data(getJsonData))
+  .pipe(swig(swigOption))
   .pipe(gulp.dest('./public'))
 })
 
 gulp.task('watch', function () {
   // gulp.watch(['./src/**/*.ts', './src/**/*.vue'], ['ts'])
   gulp.watch(['./src/**/*.js', './src/**/*.vue'], ['js'])
+  gulp.watch(['./src/**/*.html', './src/**/*.json'], ['html'])
   gulp.watch('./src/**/*.scss', ['sass'])
 })
 

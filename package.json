@@ -4,7 +4,8 @@
   "description": "adamappleのgithub",
   "main": "index.js",
   "scripts": {
-    "gulp": "gulp"
+    "dev": "gulp default",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,9 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
+    "gulp-data": "^1.2.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-swig": "^0.8.0",
     "gulp-webserver": "^0.9.1",
     "jquery": "^3.1.1",
     "node-notifier": "^4.6.1",
