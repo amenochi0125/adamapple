@@ -15,6 +15,12 @@ $ git clone https://github.com/amenochi0125/adamapple
 $ cd adamapple
 ```
 
+## ライブラリのインストール
+
+```
+$ yarn install
+```
+
 ## ビルド
 
 ```
@@ -23,4 +29,4 @@ $ yarn run dev
 
 ## 動作確認
 
-http://localhost:8000
+<http://localhost:8000>
