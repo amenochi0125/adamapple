@@ -5,6 +5,8 @@ var webpack = require('webpack-stream')
 var plumber = require('gulp-plumber')
 var notifier = require('node-notifier')
 var fs = require('fs')
+var del = require('del')
+var runSequence = require('run-sequence')
 
 // 設定ファイル
 var webpackSass = require('./src/scss/webpack.config.js')
@@ -27,13 +29,32 @@ var errorHandler = function(error) {
     title: 'コンパイルエラー',
     message: error.message,
     sound: true,
-    icon: 'images/gulp.png',
+    icon: 'gulp.png',
     contentImage: 'public/favicon.ico',
     wait: false
   })
 }
 
-gulp.task('build', ['html', 'sass', 'fonts', 'images', 'js'])
+gulp.task('clean', function() {
+  del([
+    './public/**/*.js',
+    './public/**/*.map',
+    './public/**/*.css',
+    './public/**/*.html',
+    './public/**/*.png',
+    './public/**/*.jpeg',
+    './public/**/*.jpg',
+  ])
+})
+
+gulp.task('build', function(callback) {
+  return runSequence(
+    'fonts',
+    'images',
+    ['html', 'sass', 'js'],
+    callback
+  )
+})
 
 gulp.task('sass', function() {
   gulp.src('./src/scss/style.scss')
@@ -49,7 +70,10 @@ gulp.task('fonts', function() {
 
 gulp.task('images', function() {
   gulp.src('./src/images/**')
-    .pipe(gulp.dest('./public/images'))
+  .pipe(gulp.dest('./public/images'))
+
+  gulp.src('./src/scss/images/**')
+  .pipe(gulp.dest('./public/css/images'))
 })
 
 // 廃止
@@ -89,4 +113,12 @@ gulp.task('webserver', function() {
     }))
 })
 
-gulp.task('default', ['build', 'watch', 'webserver'])
+gulp.task('default', function(callback) {
+  return runSequence(
+    'clean',
+    'build',
+    'watch',
+    'webserver',
+    callback
+  )
+})
