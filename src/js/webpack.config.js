@@ -1,23 +1,26 @@
 const path = require('path')
 var webpack = require('webpack')
 
+const current = process.cwd()
+
 module.exports = {
   entry: {
     app : './src/js/app.js'
   },
   output: {
-    filename: 'js/[name].js'
+    path: path.join(current, 'public/assets/js'),
+    filename: '[name].js'
   },
   resolve: {
-    root: [path.join(__dirname,'node_modules')],
-    extensions: ['', '.webpack.js', '.web.js', '.js']
+    root: [path.join(current,'node_modules')],
+    extensions: ['', '.js', '.vue']
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         loader: 'babel',
+        exclude: /node_modules/,
         query: {
           presets: ['es2015']
         }
@@ -32,8 +35,8 @@ module.exports = {
     presets: ['es2015'],
     plugins: ['transform-runtime']
   },
+  devtool: 'source-map',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('js/app.bundle.js')
-  ],
-  devtool: 'source-map'
+    new webpack.optimize.CommonsChunkPlugin(path.join(current, 'public/assets/js/app.bundle.js'))
+  ]
 }

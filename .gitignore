@@ -12,7 +12,4 @@ node_modules
 npm-debug.log
 
 # public
-public/css
-public/js
-public/fonts
-public/images
+public

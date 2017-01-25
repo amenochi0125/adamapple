@@ -4,8 +4,10 @@
   "description": "adamappleのgithub",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp default",
-    "build": "gulp build"
+    "dev": "gulp clean; gulp build; gulp webserver",
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "server": "gulp webserver"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,9 @@
   "homepage": "https://github.com/amenochi0125/adamapple#readme",
   "devDependencies": {
     "@types/jquery": "^2.0.34",
+    "@types/lodash": "^4.14.45",
+    "@types/node": "^6.0.55",
+    "@types/vue-router": "^0.7.28",
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -27,7 +32,6 @@
     "css-loader": "^0.26.1",
     "del": "^2.2.2",
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
     "gulp-data": "^1.2.1",
@@ -52,9 +56,9 @@
   "dependencies": {
     "bulma": "^0.2.3",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.4",
     "vue": "^2.1.6",
-    "vue-class-component": "^4.3.1",
+    "vue-class-component": "^4.4.0",
     "vue-router": "^2.1.1"
   }
 }

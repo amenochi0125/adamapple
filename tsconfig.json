@@ -10,8 +10,9 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "lib": ["es2015", "dom"]
+    "moduleResolution": "classic",
+    "lib": ["es2015", "es2015.promise", "dom"],
+    "types" : []
   },
   "files": [
     "src/ts/app.ts"
