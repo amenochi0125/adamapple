@@ -9,7 +9,7 @@
         <div class="recruit columns">
 
           <div class="column">
-            <img src="images/recruit/recruit.jpg" alt="採用">
+            <img src="assets/images/recruit/recruit.jpg" alt="採用">
           </div>
           <div class="column">
             <router-link class="recruit_01" to="/recruit_01">新卒採用</router-link>

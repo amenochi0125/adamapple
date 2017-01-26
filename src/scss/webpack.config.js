@@ -1,30 +1,30 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+const current = process.cwd()
+
 module.exports = {
+  context: current,
   entry: {
     style: './src/scss/style.scss'
   },
   output: {
-    filename: 'css/[name].css'
+    filename: '[name].css'
   },
   resolve: {
-    root: [path.join(__dirname,'node_modules')],
-    extensions: ['', '.scss', '.sass', '.css']
+    root: [path.join(current, 'public/assets/css')],
+    extensions: ['', '.webpack.config.js', '.scss']
   },
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-      },
-      {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+        loader: ExtractTextPlugin.extract("style", "css-loader?-url!sass-loader")
       }
     ]
   },
+  devtool: 'source-map',
   plugins: [
-    new ExtractTextPlugin("css/[name].css")
+    new ExtractTextPlugin("[name].css")
   ]
 }

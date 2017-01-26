@@ -5,6 +5,8 @@ var webpack = require('webpack-stream')
 var plumber = require('gulp-plumber')
 var notifier = require('node-notifier')
 var fs = require('fs')
+var del = require('del')
+var runSequence = require('run-sequence')
 
 // 設定ファイル
 var webpackSass = require('./src/scss/webpack.config.js')
@@ -27,44 +29,53 @@ var errorHandler = function(error) {
     title: 'コンパイルエラー',
     message: error.message,
     sound: true,
-    icon: 'images/gulp.png',
+    icon: 'gulp.png',
     contentImage: 'public/favicon.ico',
     wait: false
   })
 }
 
-gulp.task('build', ['html', 'sass', 'fonts', 'images', 'js'])
+gulp.task('clean', function() {
+  del(['./public/*'], {force: true})
+})
+
+gulp.task('build', function(callback) {
+  return runSequence(
+    ['fonts', 'images'],
+    ['html', 'sass', 'js'],
+    callback
+  )
+})
 
 gulp.task('sass', function() {
-  gulp.src('./src/scss/style.scss')
+  gulp.src('src/scss/style.scss')
   .pipe(plumber({errorHandler: errorHandler}))
   .pipe(webpack(webpackSass))
-  .pipe(gulp.dest('./public'))
+  .pipe(gulp.dest('./public/assets/css'))
 })
 
 gulp.task('fonts', function() {
-  gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('./public/fonts'))
+  gulp.src('node_modules/font-awesome/fonts/**')
+  .pipe(gulp.dest('./public/assets/fonts'))
 })
 
 gulp.task('images', function() {
-  gulp.src('./src/images/**')
-    .pipe(gulp.dest('./public/images'))
+  gulp.src('src/images/**')
+  .pipe(gulp.dest('./public/assets/images'))
 })
 
-// 廃止
 // gulp.task('ts', function() {
 //   gulp.src('./src/ts/app.ts')
 //   .pipe(plumber({errorHandler: errorHandler}))
 //   .pipe(webpack(webpackTypeScript))
-//   .pipe(gulp.dest('./public'))
+//   .pipe(gulp.dest('./public/assets/js'))
 // })
 
 gulp.task('js', function() {
   gulp.src('./src/js/app.js')
   .pipe(plumber({errorHandler: errorHandler}))
   .pipe(webpack(webpackJavaScript))
-  .pipe(gulp.dest('./public'))
+  .pipe(gulp.dest('./public/assets/js'))
 })
 
 gulp.task('html', function() {
@@ -74,13 +85,13 @@ gulp.task('html', function() {
 })
 
 gulp.task('watch', function () {
-  // gulp.watch(['./src/**/*.ts', './src/**/*.vue'], ['ts'])
-  gulp.watch(['./src/**/*.js', './src/**/*.vue'], ['js'])
-  gulp.watch(['./src/**/*.html'], ['html'])
-  gulp.watch('./src/**/*.scss', ['sass'])
+  // gulp.watch(['tsconfig.json', './src/**/*.ts', './src/**/*.vue'], ['ts'])
+  gulp.watch(['./src/js/**/*.js', './src/**/*.vue'], ['js'])
+  gulp.watch(['./src/html/**/*.html'], ['html'])
+  gulp.watch(['./src/scss/**/*.js', './src/**/*.scss'], ['sass'])
 })
 
-gulp.task('webserver', function() {
+gulp.task('webserver', ['watch'], function() {
   gulp.src('public')
     .pipe(webserver({
       livereload: true,
@@ -89,4 +100,12 @@ gulp.task('webserver', function() {
     }))
 })
 
-gulp.task('default', ['build', 'watch', 'webserver'])
+gulp.task('default', function(callback) {
+  return runSequence(
+    'clean',
+    'build',
+    'watch',
+    'webserver',
+    callback
+  )
+})

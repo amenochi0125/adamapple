@@ -4,7 +4,7 @@
 
     <nav class="nav">
       <div class="nav-left">
-        <router-link class="nav-item is-brand" to="/"><img src="images/logo.png" alt="Adam App Logo"></router-link>
+        <router-link class="nav-item is-brand" to="/"><img src="assets/images/logo.png" alt="Adam App Logo"></router-link>
       </div>
 
       <span id="nav-toggle" class="nav-toggle">
