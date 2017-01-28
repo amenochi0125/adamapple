@@ -1,7 +1,12 @@
 
 ## 環境構築
 
+https://nodejs.org/ja/
+
 ```
+$ node -v
+v7.4.0
+
 $ brew update
 $ brew install yarn
 $ yarn --version
